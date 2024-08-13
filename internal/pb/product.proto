@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package pbP;
+
+option go_package = "./";
+
+service ProductService{
+    rpc CreateProduct(ProductDetails)returns(ProductResponse);
+    rpc FetchByProductID(ProductID)returns(ProductDetails);
+    rpc FetchByName(ProductByName)returns(ProductDetails);
+    rpc FetchProducts(NoParam)returns(ProductList);
+}
+
+message NoParam{}
+
+message ProductDetails{
+    uint32 id = 1;
+    string category = 2;
+    string name = 3;
+    double price = 4;
+    string imagepath = 5;
+    string description = 6;
+    string size = 7;
+    uint32 quantity = 8;
+}
+
+message ProductID{
+    uint32 id = 1;
+}
+
+message ProductByName{
+    string name = 1;
+}
+
+message ProductList{
+    repeated ProductDetails item = 1;
+}
+
+message ProductResponse{
+    string status = 1;
+    string error = 2;
+    string message = 3;
+}
